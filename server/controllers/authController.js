@@ -4,14 +4,14 @@ import jwt from 'jsonwebtoken';
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, username, email, password } = req.body;
 
     const existUser = await User.findOne({ email });
     if (existUser) return res.status(409).json('User with this email already exist!');
 
-    const user = await User.create({ name, email, password });
+    const user = await User.create({ name, username, email, password });
 
-    res.status(201).json({ status: 'success', body: { id: user._id, email } });
+    res.status(201).json({ status: 'success', body: { id: user._id, email, username, name } });
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }

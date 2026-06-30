@@ -1,10 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import connectDB from './db/index.js';
+import connectDB from './config/db.js';
 import authRouter from './routes/auth.js';
 import postRouter from './routes/posts.js';
 import likeRouter from './routes/likes.js';
 import commentRouter from './routes/comments.js';
+import userRouter from './routes/users.js';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/posts', postRouter);
 app.use('/likes', likeRouter);
+app.use('/users', userRouter);
 app.use('/comments', commentRouter);
 
 app.listen(port, () => {

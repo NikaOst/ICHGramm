@@ -5,6 +5,7 @@ import {
   deleteUser,
   getAllUsers,
   getUserById,
+  subscribeOnUser,
 } from '../controllers/userController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
 
@@ -30,5 +31,9 @@ userRouter.put('/:id', authMiddleware, updateUser);
 // delete user
 // http://127.0.0.1:3333/users/:id
 userRouter.delete('/:id', authMiddleware, deleteUser);
+
+// subscribe on user
+// http://127.0.0.1:3333/users/:id/subscribe
+userRouter.post('/:id/subscribe', authMiddleware, subscribeOnUser);
 
 export default userRouter;
