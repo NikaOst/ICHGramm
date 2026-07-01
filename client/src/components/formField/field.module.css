@@ -1,0 +1,10 @@
+.formInput {
+  padding: 0 0.5rem;
+  background-color: #fafafa;
+  border: 1px solid #dbdbdb;
+  border-radius: 0.18rem;
+  color: #737373;
+  font-size: 0.75rem;
+  line-height: 2.25rem;
+  font-weight: 400;
+}

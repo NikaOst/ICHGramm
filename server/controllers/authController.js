@@ -21,11 +21,14 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email_or_username, password } = req.body;
 
-    if (!email || !password) return res.status(400).json('Email and password are required!');
+    if (!email_or_username || !password)
+      return res.status(400).json('Email and password are required!');
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({
+      $or: [{ email: email_or_username }, { username: email_or_username }],
+    });
     if (!user) {
       return res.status(401).json('Invalid email or password');
     }

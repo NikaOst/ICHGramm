@@ -12,9 +12,10 @@ import ExplorePage from './pages/explorePage';
 import PostPage from './pages/postPage';
 import ProfilePage from './pages/profilePage';
 import SearchPage from './pages/searchPage';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const token = localStorage.getItem('token');
+  const token = useSelector((state) => state.auth.token) || localStorage.getItem('token');
 
   if (!token) {
     return (

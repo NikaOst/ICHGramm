@@ -1,0 +1,11 @@
+.submitBtn {
+  background-color: #0095f6;
+  color: #ffffff;
+  text-align: center;
+  padding: 0.43rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.87rem;
+  line-height: 1.125rem;
+  font-weight: 600;
+}
