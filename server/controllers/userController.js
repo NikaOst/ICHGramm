@@ -66,6 +66,7 @@ export const getUserById = async (req, res) => {
     const user = await User.findById(userId)
       .select('-password')
       .populate('subscribers subscribes', 'name username');
+    if (!user) return res.status(404).json('User not found');
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });

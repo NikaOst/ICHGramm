@@ -9,11 +9,11 @@ const commentRouter = express.Router();
 commentRouter.post('/post/:id', authMiddleware, commentPost);
 
 // update comment
-// http://127.0.0.1:3333/comments/:id/post/:id
-commentRouter.put('/:id/post/:id', authMiddleware, updateComment);
+// http://127.0.0.1:3333/comments/:id
+commentRouter.put('/:id', authMiddleware, updateComment);
 
 // delete comment
-// http://127.0.0.1:3333/comments/:id/post/:id
-commentRouter.delete('/:id/post/:id', authMiddleware, deleteComment);
+// http://127.0.0.1:3333/comments/:id
+commentRouter.delete('/:id', authMiddleware, deleteComment);
 
 export default commentRouter;

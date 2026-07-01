@@ -5,6 +5,7 @@ import {
   deletePost,
   getAllPosts,
   getPostById,
+  getPostsComments,
 } from '../controllers/postController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
 
@@ -29,5 +30,9 @@ postRouter.put('/:id', authMiddleware, updatePost);
 // delete post
 // http://127.0.0.1:3333/posts/:id
 postRouter.delete('/:id', authMiddleware, deletePost);
+
+// get post's comments
+// http://127.0.0.1:3333/posts/:id/comments
+postRouter.get('/:id/comments', authMiddleware, getPostsComments);
 
 export default postRouter;
