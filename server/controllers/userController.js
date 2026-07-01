@@ -13,14 +13,24 @@ export const getMe = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    if (req.user.userId !== req.params.id) {
+      return res.status(403).json('Forbidden');
+    }
+    const { name, username, about, website } = req.body;
+    const updateData = { name, username, about, website };
+
+    if (req.file) {
+      updateData.image = `/uploads/avatars/${req.file.filename}`;
+    }
+
+    const user = await User.findByIdAndUpdate(req.params.id, updateData, {
       runValidators: true,
       new: true,
     })
       .select('-password')
       .populate('subscribers subscribes', 'name username');
     if (!user) return res.status(404).json('User not found');
-    res.status(201).json(user);
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }
@@ -28,6 +38,9 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
+    if (req.user.userId !== req.params.id) {
+      return res.status(403).json('Forbidden');
+    }
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) return res.status(404).json('User not found');
     res.status(200).json('User was deleted');
@@ -78,8 +91,14 @@ export const subscribeOnUser = async (req, res) => {
     const curUser = req.user.userId;
     const targetUser = req.params.id;
 
+    if (curUser === targetUser) {
+      return res.status(400).json('You cannot subscribe to yourself');
+    }
+
     const cUser = await User.findById(curUser);
     const tUser = await User.findById(targetUser);
+
+    if (!cUser || !tUser) return res.status(404).json('User not found');
 
     const alreadySubscribed = cUser.subscribes.some((id) => id.equals(targetUser));
 

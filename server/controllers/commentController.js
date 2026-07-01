@@ -8,7 +8,7 @@ export const commentPost = async (req, res) => {
     const postId = req.params.id;
 
     const newComment = await Comment.create({ body, author: authorId, post: postId });
-    res.status(200).json(newComment);
+    res.status(201).json(newComment);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }
@@ -17,9 +17,10 @@ export const commentPost = async (req, res) => {
 export const updateComment = async (req, res) => {
   try {
     const userId = req.user.userId;
+
     const comment = await Comment.findOneAndUpdate(
       { _id: req.params.id, author: userId },
-      req.body,
+      req.body.body,
       {
         runValidators: true,
         new: true,

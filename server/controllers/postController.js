@@ -1,12 +1,18 @@
 import Comment from '../models/Comment.js';
 import Post from '../models/Post.js';
-import User from '../models/User.js';
 
 export const createPost = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const { title, body } = req.body;
-    const newPost = await Post.create({ title, body, author: userId });
+    const updateData = { ...req.body };
+
+    if (req.file) {
+      updateData.image = `/uploads/postImg/${req.file.filename}`;
+    }
+
+    updateData.author = userId;
+
+    const newPost = await Post.create(updateData);
     res.status(201).json(newPost);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
@@ -16,12 +22,20 @@ export const createPost = async (req, res) => {
 export const updatePost = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const post = await Post.findOneAndUpdate({ _id: req.params.id, author: userId }, req.body, {
+
+    const { title, body } = req.body;
+    const updateData = { title, body };
+
+    if (req.file) {
+      updateData.image = `/uploads/postImg/${req.file.filename}`;
+    }
+
+    const post = await Post.findOneAndUpdate({ _id: req.params.id, author: userId }, updateData, {
       runValidators: true,
       new: true,
     });
     if (!post) return res.status(404).json('Post not found!');
-    res.status(201).json(post);
+    res.status(200).json(post);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }

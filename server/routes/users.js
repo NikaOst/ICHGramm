@@ -8,8 +8,10 @@ import {
   subscribeOnUser,
 } from '../controllers/userController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
+import { createImageUpload } from '../middlewares/uploadImage.js';
 
 const userRouter = express.Router();
+const uploadAvatar = createImageUpload('avatars');
 
 // getMe
 // http://127.0.0.1:3333/users/me
@@ -26,7 +28,7 @@ userRouter.get('/:id', authMiddleware, getUserById);
 
 // update user
 // http://127.0.0.1:3333/users/:id
-userRouter.put('/:id', authMiddleware, updateUser);
+userRouter.put('/:id', authMiddleware, uploadAvatar.single('avatar'), updateUser);
 
 // delete user
 // http://127.0.0.1:3333/users/:id
