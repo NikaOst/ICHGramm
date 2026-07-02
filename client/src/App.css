@@ -1,0 +1,7 @@
+.mainAppPage {
+  display: flex;
+  flex-direction: column;
+}
+.mainPageNav {
+  display: flex;
+}

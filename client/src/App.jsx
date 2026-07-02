@@ -28,8 +28,8 @@ function App() {
   }
 
   return (
-    <div>
-      <div>
+    <div className="mainAppPage">
+      <div className="mainPageNav">
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
