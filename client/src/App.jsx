@@ -6,16 +6,24 @@ import NotFoundPage from './pages/notFoundPage';
 import LoginPage from './pages/loginPage';
 import RegisterPage from './pages/singupPage';
 import HomePage from './pages/homePage';
-import CreatePostPage from './pages/createPostPage';
 import EditPostPage from './pages/editProfilePage';
 import ExplorePage from './pages/explorePage';
-import PostPage from './pages/postPage';
 import ProfilePage from './pages/profilePage';
-import SearchPage from './pages/searchPage';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getMe } from './redux/slices/usersSlice';
+import MessagePage from './pages/messagePage';
 
 function App() {
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token) || localStorage.getItem('token');
+  const me = useSelector((state) => state.users.me);
+
+  useEffect(() => {
+    if (token && !me) {
+      dispatch(getMe());
+    }
+  }, [token, me, dispatch]);
 
   if (!token) {
     return (
@@ -35,12 +43,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Navigate to="/" replace />} />
           <Route path="/register" element={<Navigate to="/" replace />} />
-          <Route path="/create-post" element={<CreatePostPage />} />
           <Route path="/edit-profile" element={<EditPostPage />} />
+          <Route path="/message" element={<MessagePage />} />
           <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/post" element={<PostPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/search-profile" element={<SearchPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

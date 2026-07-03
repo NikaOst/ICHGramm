@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice.js';
+import userReducer from './slices/usersSlice.js';
 
 const store = configureStore({
   reducer: {
@@ -7,7 +8,7 @@ const store = configureStore({
     // comments: commentReducer,
     // likes: likeReducer,
     // posts: cpostReducer,
-    // users: userReducer,
+    users: userReducer,
   },
 });
 export default store;

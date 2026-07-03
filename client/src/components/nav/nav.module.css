@@ -4,3 +4,46 @@
   padding: 1.75rem 1.56rem;
   width: 15.25rem;
 }
+.regularAvatar {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.navPage {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+.navPage button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.37rem;
+  margin-bottom: 2.93rem;
+}
+
+.navLogo {
+  margin-bottom: 1.31rem;
+}
+
+.navButton {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.navButtonActive {
+  composes: navButton;
+  font-weight: 700;
+}

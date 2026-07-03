@@ -21,7 +21,6 @@ function LoginPage() {
   const formSubmit = async (data) => {
     setErrorMessage('');
     const resultAction = await dispatch(login(data));
-
     if (login.fulfilled.match(resultAction)) {
       reset();
       navigate('/', { replace: true });
