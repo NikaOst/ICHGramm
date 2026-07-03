@@ -10,14 +10,16 @@ import EditPostPage from './pages/editProfilePage';
 import ExplorePage from './pages/explorePage';
 import ProfilePage from './pages/profilePage';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getMe } from './redux/slices/usersSlice';
 import MessagePage from './pages/messagePage';
+import Overlay from './components/overlay';
 
 function App() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token) || localStorage.getItem('token');
   const me = useSelector((state) => state.users.me);
+  const [activeOverlay, setActiveOverlay] = useState(null);
 
   useEffect(() => {
     if (token && !me) {
@@ -37,7 +39,7 @@ function App() {
 
   return (
     <div className="mainAppPage">
-      <Navbar />
+      <Navbar activeOverlay={activeOverlay} setActiveOverlay={setActiveOverlay} />
       <div className="mainPageNav">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -50,7 +52,10 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
-      <Footer />
+      <Footer setActiveOverlay={setActiveOverlay} />
+      {activeOverlay && (
+        <Overlay activeOverlay={activeOverlay} setActiveOverlay={setActiveOverlay} />
+      )}
     </div>
   );
 }

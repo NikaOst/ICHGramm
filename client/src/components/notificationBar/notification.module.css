@@ -1,0 +1,36 @@
+.mainSearchBox {
+  border-radius: 0 1rem 1rem 0;
+  padding: 1rem 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 24.75rem;
+  background-color: white;
+  z-index: 1001;
+  height: 81vh;
+}
+
+.searchInput {
+  background-color: #efefef;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.65rem 1rem;
+}
+
+.searchInput::placeholder {
+  color: #737373;
+}
+
+.barTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.87rem;
+  margin-bottom: 1.03rem;
+}
+
+.barSubtitle {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  margin-bottom: 1.03rem;
+}

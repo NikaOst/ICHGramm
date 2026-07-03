@@ -1,22 +1,43 @@
 import styles from './footer.module.css';
 import { NavLink } from 'react-router-dom';
 
-function Footer() {
+function Footer({ setActiveOverlay }) {
+  const toggleOverlay = (name) => {
+    setActiveOverlay((prev) => (prev === name ? null : name));
+  };
+
   return (
     <div className={styles.footerMainBox}>
       <div className={styles.footerMenu}>
-        <NavLink to="/" end className={styles.footerMenuOption}>
+        <NavLink
+          onClick={() => setActiveOverlay(null)}
+          to="/"
+          end
+          className={styles.footerMenuOption}>
           Home
         </NavLink>
-        <button className={styles.footerMenuOption}>Search</button>
-        <NavLink to="/explore" end className={styles.footerMenuOption}>
+        <button onClick={() => toggleOverlay('search')} className={styles.footerMenuOption}>
+          Search
+        </button>
+        <NavLink
+          onClick={() => setActiveOverlay(null)}
+          to="/explore"
+          end
+          className={styles.footerMenuOption}>
           Explore
         </NavLink>
-        <NavLink to="/messages" className={styles.footerMenuOption}>
+        <NavLink
+          onClick={() => setActiveOverlay(null)}
+          to="/messages"
+          className={styles.footerMenuOption}>
           Messages
         </NavLink>
-        <button className={styles.footerMenuOption}>Notificaitons</button>
-        <button className={styles.footerMenuOption}>Create</button>
+        <button onClick={() => toggleOverlay('notifications')} className={styles.footerMenuOption}>
+          Notificaitons
+        </button>
+        <button onClick={() => toggleOverlay('create')} className={styles.footerMenuOption}>
+          Create
+        </button>
       </div>
       <span>© 2024 ICHgram</span>
     </div>

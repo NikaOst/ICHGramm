@@ -3,9 +3,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem;
-  gap: 3rem;
   padding: 1.5rem 0 3.81rem;
+  gap: 3rem;
+  background-color: white;
+  position: relative;
+  z-index: 1001;
 }
 
 .footerMenu {
