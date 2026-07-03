@@ -37,14 +37,14 @@ function App() {
 
   return (
     <div className="mainAppPage">
+      <Navbar />
       <div className="mainPageNav">
-        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Navigate to="/" replace />} />
           <Route path="/register" element={<Navigate to="/" replace />} />
           <Route path="/edit-profile" element={<EditPostPage />} />
-          <Route path="/message" element={<MessagePage />} />
+          <Route path="/messages" element={<MessagePage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="*" element={<NotFoundPage />} />

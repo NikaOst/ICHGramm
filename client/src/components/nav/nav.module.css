@@ -1,8 +1,9 @@
 .navMainBox {
   border-right: 1px solid #dbdbdb;
-  height: 85vh;
+  height: 80vh;
   padding: 1.75rem 1.56rem;
   width: 15.25rem;
+  position: fixed;
 }
 .regularAvatar {
   width: 1.7rem;
