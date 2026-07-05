@@ -1,0 +1,87 @@
+.card {
+  width: 100%;
+  min-width: 0;
+  max-width: 25rem;
+  border-bottom: 0.86px solid #dbdbdb;
+  padding-bottom: 2.31rem;
+}
+
+.mainPostData {
+  display: flex;
+  flex-direction: column;
+  gap: 0.64rem;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.regularAvatar {
+  width: 1.62rem;
+  height: 1.62rem;
+}
+
+.headerPost {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.author,
+.createPost {
+  font-size: 0.75rem;
+  line-height: 0.96rem;
+}
+
+.author,
+.headerPost button,
+.likesSpan {
+  font-weight: 600;
+}
+
+.likesSpan {
+  margin-bottom: 0.75rem;
+}
+
+.createPost,
+.commentsSpan,
+.postBody button {
+  color: #737373;
+  font-weight: 400;
+}
+
+.headerPost button {
+  background-color: transparent;
+  border: none;
+  color: #0095f6;
+  cursor: pointer;
+}
+
+.likeCommentBar {
+  display: flex;
+  gap: 0.86rem;
+}
+
+.likeCommentBar img {
+  cursor: pointer;
+}
+
+.likesSpan,
+.postTitle,
+.postBody,
+.commentsSpan {
+  font-size: 0.75rem;
+  line-height: 0.96rem;
+}
+
+.postTitle {
+  margin-bottom: 0.6rem;
+}
+
+.postBody button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

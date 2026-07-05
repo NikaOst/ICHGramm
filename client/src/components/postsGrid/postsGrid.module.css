@@ -1,0 +1,7 @@
+.gridBox {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(404px, 1fr));
+  gap: 23px 40px;
+  align-items: start;
+}

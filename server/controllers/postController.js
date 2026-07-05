@@ -54,8 +54,19 @@ export const deletePost = async (req, res) => {
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
-    res.status(200).json(posts);
+    const posts = await Post.find().populate('author', 'username image');
+
+    const postsWithComments = await Promise.all(
+      posts.map(async (post) => {
+        const comments = await getPostsComments(post.id);
+        return {
+          post,
+          comments,
+        };
+      }),
+    );
+
+    res.status(200).json(postsWithComments);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }
@@ -63,22 +74,27 @@ export const getAllPosts = async (req, res) => {
 
 export const getPostById = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate('author', 'username image');
     if (!post) return res.status(404).json('Post not found');
-    res.status(200).json(post);
+
+    const comments = await getPostsComments(post.id);
+
+    res.status(200).json({
+      post,
+      comments,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }
 };
 
-export const getPostsComments = async (req, res) => {
+const getPostsComments = async (postId) => {
   try {
-    const postId = req.params.id;
     const comments = await Comment.find({ post: postId })
       .populate('author', 'username')
       .select('-post');
-    res.status(200).json(comments);
+    return comments;
   } catch (error) {
-    res.status(500).json({ error: error.message, message: 'Internal server error' });
+    return error;
   }
 };
