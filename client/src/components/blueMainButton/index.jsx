@@ -1,15 +1,22 @@
 import styles from './button.module.css';
 
-function TargetButton({ text, type }) {
+function TargetButton({ text, type, bgColor, color, onClick, padding }) {
   if (type === 'submit') {
     return (
-      <button className={styles.submitBtn} type="submit">
+      <button
+        style={{ backgroundColor: bgColor, color, padding }}
+        className={styles.submitBtn}
+        type="submit">
         {text}
       </button>
     );
   } else
     return (
-      <button className={styles.textBtn} type="button">
+      <button
+        style={{ backgroundColor: bgColor, color, padding }}
+        className={styles.textBtn}
+        onClick={onClick}
+        type="button">
         {text}
       </button>
     );

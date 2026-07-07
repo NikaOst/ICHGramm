@@ -1,3 +1,4 @@
+import Post from '../models/Post.js';
 import User from '../models/User.js';
 
 export const getMe = async (req, res) => {
@@ -5,7 +6,8 @@ export const getMe = async (req, res) => {
     const user = await User.findById(req.user.userId)
       .select('-password')
       .populate('subscribers subscribes', 'name username');
-    res.status(200).json(user);
+    const usersPosts = await Post.find({ author: req.user.userId });
+    res.status(200).json({ user, usersPosts });
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }
@@ -13,17 +15,14 @@ export const getMe = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    if (req.user.userId !== req.params.id) {
-      return res.status(403).json('Forbidden');
-    }
-    const { name, username, about, website } = req.body;
-    const updateData = { name, username, about, website };
+    const { username, about, website } = req.body;
+    const updateData = { username, about, website };
 
     if (req.file) {
       updateData.image = `/uploads/avatars/${req.file.filename}`;
     }
 
-    const user = await User.findByIdAndUpdate(req.params.id, updateData, {
+    const user = await User.findByIdAndUpdate(req.user.userId, updateData, {
       runValidators: true,
       new: true,
     })
@@ -38,10 +37,7 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    if (req.user.userId !== req.params.id) {
-      return res.status(403).json('Forbidden');
-    }
-    const user = await User.findByIdAndDelete(req.params.id);
+    const user = await User.findByIdAndDelete(req.user.userId);
     if (!user) return res.status(404).json('User not found');
     res.status(200).json('User was deleted');
   } catch (error) {
@@ -80,7 +76,8 @@ export const getUserById = async (req, res) => {
       .select('-password')
       .populate('subscribers subscribes', 'name username');
     if (!user) return res.status(404).json('User not found');
-    res.status(200).json(user);
+    const usersPosts = await Post.find({ author: userId });
+    res.status(200).json({ user, usersPosts });
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }
@@ -107,13 +104,13 @@ export const subscribeOnUser = async (req, res) => {
       tUser.subscribers = tUser.subscribers.filter((id) => !id.equals(curUser));
       await tUser.save();
       await cUser.save();
-      res.status(200).json(`You was unsubscribed from ${tUser.username}!`);
+      res.status(200).json({ user: cUser });
     } else {
       cUser.subscribes.push(targetUser);
       tUser.subscribers.push(curUser);
       await tUser.save();
       await cUser.save();
-      res.status(200).json(`You was subscribed to ${tUser.username}!`);
+      res.status(200).json({ user: cUser });
     }
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });

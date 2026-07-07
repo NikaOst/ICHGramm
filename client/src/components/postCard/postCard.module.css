@@ -29,6 +29,25 @@
   gap: 0.7rem;
 }
 
+.avatarWrap {
+  width: 1.62rem;
+  height: 1.62rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.avatarWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.author,
+.headerPost img {
+  cursor: pointer;
+}
+
 .author,
 .createPost {
   font-size: 0.75rem;
@@ -66,6 +85,8 @@
 
 .likeCommentBar img {
   cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .likesSpan,

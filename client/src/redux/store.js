@@ -2,12 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice.js';
 import userReducer from './slices/usersSlice.js';
 import postReducer from './slices/postsSlice.js';
+import likeReducer from './slices/likesSlice.js';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     // comments: commentReducer,
-    // likes: likeReducer,
+    likes: likeReducer,
     posts: postReducer,
     users: userReducer,
   },

@@ -99,7 +99,13 @@ function RegisterPage() {
                 </div>
               </div>
               <div className={styles.submitButton}>
-                <TargetButton type="submit" text="Sign up" />
+                <TargetButton
+                  type="submit"
+                  text="Sign up"
+                  bgColor="#0095f6"
+                  color="#ffffff"
+                  padding="0.46rem"
+                />
               </div>
             </form>
           </div>

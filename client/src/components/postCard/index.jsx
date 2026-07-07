@@ -2,36 +2,87 @@ import likeImg from '../../assets/icons/likeImg.svg';
 import commentImg from '../../assets/icons/commentImg.svg';
 import styles from './postCard.module.css';
 import regularProfilPic from '../../assets/icons/userRegular.svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { followUser } from '../../redux/slices/usersSlice';
+import filledLike from '../../assets/icons/filledLike.svg';
+import { toggleLike } from '../../redux/slices/likesSlice';
 
 function PostCard({ post }) {
+  const me = useSelector((state) => state.users.me);
+  const likeState = useSelector((state) => state.likes.byPostId[String(post.post._id)]);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const authorId = post.post.author?._id;
+
+  const goToAuthorProfile = () => {
+    if (authorId) {
+      navigate(`/profile/${authorId}`);
+    }
+  };
+
+  const handleFollow = () => {
+    if (authorId) {
+      dispatch(followUser(authorId));
+    }
+  };
+
+  const isFollowing = (me?.subscribes || []).some((sub) => {
+    const subId = typeof sub === 'string' ? sub : sub?._id;
+    return String(subId) === String(authorId);
+  });
+
+  const isLiked = likeState?.liked ?? false;
+  const likesCount = likeState?.likesCount ?? post.post.likes;
+
+  const handleToggleLike = () => {
+    dispatch(toggleLike(String(post.post._id)));
+  };
+
   return (
     <div className={styles.card}>
-      {console.log(post.post.title)}
       <div className={styles.mainPostData}>
         <div className={styles.headerPost}>
-          {post.post.author?.image ? (
-            <img src={post.author?.image} alt="profilePic" />
-          ) : (
-            <img className={styles.regularAvatar} src={regularProfilPic} alt="regularProfilPic" />
-          )}
-          <span className={styles.author}>{post.post.author?.username} </span>
+          <div className={styles.avatarWrap}>
+            {post.post.author?.image ? (
+              <img
+                src={`${import.meta.env.VITE_BASE_URL}${post.post.author?.image}`}
+                alt="profilePic"
+                onClick={goToAuthorProfile}
+              />
+            ) : (
+              <img
+                className={styles.regularAvatar}
+                src={regularProfilPic}
+                alt="regularProfilPic"
+                onClick={goToAuthorProfile}
+              />
+            )}
+          </div>
+
+          <span className={styles.author} onClick={goToAuthorProfile}>
+            {post.post.author?.username}
+          </span>
           <span className={styles.createPost}>• wek • </span>
-          <button>follow</button>
+          {me?.username !== post.post.author?.username && (
+            <button onClick={handleFollow}>{isFollowing ? 'unfollow' : 'follow'}</button>
+          )}
         </div>
-        <img src={post.post.image} alt="PostImg" />
+        <img src={`${import.meta.env.VITE_BASE_URL}${post.post.image}`} alt="PostImg" />
         <div className={styles.likeCommentBar}>
-          <img src={likeImg} alt="likeImg" />
+          <img src={isLiked ? filledLike : likeImg} alt="likeImg" onClick={handleToggleLike} />
           <img src={commentImg} alt="commentImg" />
         </div>
-        <span className={styles.likesSpan}>{post.post.likes} likes</span>
+        <span className={styles.likesSpan}>{likesCount} likes</span>
       </div>
       <div className={styles.mainPostData}>
-        <span className={styles.postTitle}>{post.post.title}</span>
         <div className={styles.postBody}>
           <span>{post.post.body}... </span>
           <button>more</button>
         </div>
-        <span className={styles.commentsSpan}>All comments ({post.comments.length})</span>
+        <span className={styles.commentsSpan}>{post.comments.length} comments</span>
       </div>
     </div>
   );

@@ -23,8 +23,8 @@ export const updatePost = async (req, res) => {
   try {
     const userId = req.user.userId;
 
-    const { title, body } = req.body;
-    const updateData = { title, body };
+    const { body } = req.body;
+    const updateData = { body };
 
     if (req.file) {
       updateData.image = `/uploads/postImg/${req.file.filename}`;

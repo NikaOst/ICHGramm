@@ -27,12 +27,12 @@ userRouter.get('/', authMiddleware, getAllUsers);
 userRouter.get('/:id', authMiddleware, getUserById);
 
 // update user
-// http://127.0.0.1:3333/users/:id
-userRouter.put('/:id', authMiddleware, uploadAvatar.single('avatar'), updateUser);
+// http://127.0.0.1:3333/users
+userRouter.put('/', authMiddleware, uploadAvatar.single('avatar'), updateUser);
 
 // delete user
-// http://127.0.0.1:3333/users/:id
-userRouter.delete('/:id', authMiddleware, deleteUser);
+// http://127.0.0.1:3333/users
+userRouter.delete('/', authMiddleware, deleteUser);
 
 // subscribe on user
 // http://127.0.0.1:3333/users/:id/subscribe

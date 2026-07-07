@@ -71,7 +71,13 @@ function LoginPage() {
                 />
 
                 <div className={styles.submitButton}>
-                  <TargetButton type="submit" text="Log in" />
+                  <TargetButton
+                    type="submit"
+                    text="Log in"
+                    bgColor="#0095f6"
+                    color="#ffffff"
+                    padding="0.46rem"
+                  />
                 </div>
               </form>
 

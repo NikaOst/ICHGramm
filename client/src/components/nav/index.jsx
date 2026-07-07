@@ -99,11 +99,14 @@ function Navbar({ activeOverlay, setActiveOverlay }) {
           </div>
         </div>
         <div className={styles.navPage}>
-          {me?.image ? (
-            <img src={me?.image} alt="profilePic" />
-          ) : (
-            <img className={styles.regularAvatar} src={regularProfilPic} alt="regularProfilPic" />
-          )}
+          <div className={styles.avatarWrap}>
+            {me?.image ? (
+              <img src={`${import.meta.env.VITE_BASE_URL}${me.image}`} alt="profilePic" />
+            ) : (
+              <img className={styles.regularAvatar} src={regularProfilPic} alt="regularProfilPic" />
+            )}
+          </div>
+
           <NavLink
             to="/profile"
             className={({ isActive }) =>

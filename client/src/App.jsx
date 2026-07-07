@@ -19,13 +19,14 @@ function App() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token) || localStorage.getItem('token');
   const me = useSelector((state) => state.users.me);
+  const myPosts = useSelector((state) => state.users.myPosts);
   const [activeOverlay, setActiveOverlay] = useState(null);
 
   useEffect(() => {
-    if (token && !me) {
+    if (token && (!me || !myPosts)) {
       dispatch(getMe());
     }
-  }, [token, me, dispatch]);
+  }, [token, myPosts, me, dispatch]);
 
   if (!token) {
     return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/messages" element={<MessagePage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

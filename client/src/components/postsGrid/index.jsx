@@ -13,7 +13,16 @@ function PostsGrid({ type, posts }) {
       </div>
     </div>
   ) : (
-    <div />
+    <div className={styles.gridPicBox}>
+      {posts?.map((post) => (
+        <div className={styles.postPic} key={post._id}>
+          <img
+            src={`${import.meta.env.VITE_BASE_URL}${post?.post?.image || post?.image}`}
+            alt="postImg"
+          />
+        </div>
+      ))}
+    </div>
   );
 }
 

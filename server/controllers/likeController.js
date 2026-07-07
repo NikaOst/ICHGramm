@@ -16,7 +16,9 @@ export const likePost = async (req, res) => {
       post.likes--;
       await post.save();
 
-      res.status(200).json(`You unliked the post!`);
+      res
+        .status(200)
+        .json({ postId: postId, authorId: userId, liked: false, likesCount: post.likes });
     } else {
       const post = await Post.findById(postId);
       if (!post) return res.status(404).json('Post not found');
@@ -26,7 +28,9 @@ export const likePost = async (req, res) => {
       post.likes++;
       await post.save();
 
-      res.status(200).json(`You liked the post!`);
+      res
+        .status(200)
+        .json({ postId: postId, authorId: userId, liked: true, likesCount: post.likes });
     }
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });

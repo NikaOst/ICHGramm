@@ -1,8 +1,7 @@
-.submitBtn {
-  background-color: #0095f6;
-  color: #ffffff;
+.submitBtn,
+.textBtn {
   text-align: center;
-  padding: 0.43rem;
+  /* padding: 0.43rem 3.8rem; */
   border: none;
   border-radius: 0.5rem;
   font-size: 0.87rem;
