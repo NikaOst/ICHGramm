@@ -15,6 +15,27 @@ export const getAllPosts = createAsyncThunk('/posts', async (_, { rejectWithValu
   }
 });
 
+export const createPost = createAsyncThunk(
+  'posts/createPost',
+  async ({ body, image }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+      const formData = new FormData();
+
+      formData.append('body', body);
+      formData.append('image', image);
+
+      const response = await axios.post(`${BASE_URL}/posts`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  },
+);
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState: {
@@ -43,6 +64,17 @@ const postsSlice = createSlice({
         state.post = null;
         state.status = null;
         state.error = null;
+      })
+      .addCase(createPost.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(createPost.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(createPost.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
       });
   },
 });

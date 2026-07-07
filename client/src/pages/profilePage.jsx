@@ -8,6 +8,7 @@ import { getUserById } from '../redux/slices/usersSlice';
 import { useParams, useNavigate } from 'react-router-dom';
 import { logout } from '../redux/slices/authSlice';
 import { getMe, followUser } from '../redux/slices/usersSlice';
+import regularProfilPic from '../assets/icons/userRegular.svg';
 
 function ProfilePage() {
   const dispatch = useDispatch();
@@ -55,9 +56,14 @@ function ProfilePage() {
   return (
     <div className={styles.profileMainBox}>
       <div className={styles.mainUserDataContainer}>
-        <div className={styles.userDataImageContainer}>
-          <img src={`${import.meta.env.VITE_BASE_URL}${profileUser?.image}`} alt="avatar" />
-        </div>
+        {profileUser?.image ? (
+          <div className={styles.userDataImageContainer}>
+            <img src={`${import.meta.env.VITE_BASE_URL}${profileUser?.image}`} alt="avatar" />
+          </div>
+        ) : (
+          <img className={styles.regularAvatar} src={regularProfilPic} alt="regularProfilPic" />
+        )}
+
         <div className={styles.userDataContainer}>
           <div className={styles.headerProfil}>
             <span>{profileUser?.username}</span>

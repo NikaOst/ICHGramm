@@ -10,12 +10,12 @@ import { toggleLike } from '../../redux/slices/likesSlice';
 
 function PostCard({ post }) {
   const me = useSelector((state) => state.users.me);
-  const likeState = useSelector((state) => state.likes.byPostId[String(post.post._id)]);
+  const likeState = useSelector((state) => state.likes.byPostId[String(post?.post?._id)]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const authorId = post.post.author?._id;
+  const authorId = post?.post?.author?._id;
 
   const goToAuthorProfile = () => {
     if (authorId) {
@@ -35,42 +35,44 @@ function PostCard({ post }) {
   });
 
   const isLiked = likeState?.liked ?? false;
-  const likesCount = likeState?.likesCount ?? post.post.likes;
+  const likesCount = likeState?.likesCount ?? post?.post?.likes;
 
   const handleToggleLike = () => {
-    dispatch(toggleLike(String(post.post._id)));
+    dispatch(toggleLike(String(post?.post?._id)));
   };
 
   return (
     <div className={styles.card}>
       <div className={styles.mainPostData}>
         <div className={styles.headerPost}>
-          <div className={styles.avatarWrap}>
-            {post.post.author?.image ? (
+          {post?.post?.author?.image ? (
+            <div className={styles.avatarWrap}>
               <img
-                src={`${import.meta.env.VITE_BASE_URL}${post.post.author?.image}`}
+                src={`${import.meta.env.VITE_BASE_URL}${post?.post?.author?.image}`}
                 alt="profilePic"
                 onClick={goToAuthorProfile}
               />
-            ) : (
-              <img
-                className={styles.regularAvatar}
-                src={regularProfilPic}
-                alt="regularProfilPic"
-                onClick={goToAuthorProfile}
-              />
-            )}
-          </div>
+            </div>
+          ) : (
+            <img
+              className={styles.regularAvatar}
+              src={regularProfilPic}
+              alt="regularProfilPic"
+              onClick={goToAuthorProfile}
+            />
+          )}
 
           <span className={styles.author} onClick={goToAuthorProfile}>
-            {post.post.author?.username}
+            {post?.post?.author?.username}
           </span>
           <span className={styles.createPost}>• wek • </span>
-          {me?.username !== post.post.author?.username && (
+          {me?.username !== post?.post?.author?.username && (
             <button onClick={handleFollow}>{isFollowing ? 'unfollow' : 'follow'}</button>
           )}
         </div>
-        <img src={`${import.meta.env.VITE_BASE_URL}${post.post.image}`} alt="PostImg" />
+        <div className={styles.postImgContaier}>
+          <img src={`${import.meta.env.VITE_BASE_URL}${post?.post?.image}`} alt="PostImg" />
+        </div>
         <div className={styles.likeCommentBar}>
           <img src={isLiked ? filledLike : likeImg} alt="likeImg" onClick={handleToggleLike} />
           <img src={commentImg} alt="commentImg" />
@@ -79,10 +81,10 @@ function PostCard({ post }) {
       </div>
       <div className={styles.mainPostData}>
         <div className={styles.postBody}>
-          <span>{post.post.body}... </span>
+          <span>{post?.post?.body}... </span>
           <button>more</button>
         </div>
-        <span className={styles.commentsSpan}>{post.comments.length} comments</span>
+        <span className={styles.commentsSpan}>{post?.comments?.length} comments</span>
       </div>
     </div>
   );

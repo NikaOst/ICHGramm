@@ -12,3 +12,8 @@
   margin-top: 0;
   z-index: 1001;
 }
+
+.overlayCreatePanel {
+  margin: 0 auto;
+  margin-top: 5%;
+}

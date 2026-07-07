@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { updateMe } from '../redux/slices/usersSlice.js';
 import linkPic from '../assets/icons/link.svg';
+import regularProfilPic from '../assets/icons/userRegular.svg';
 
 function EditPostPage() {
   const dispatch = useDispatch();
@@ -52,12 +53,16 @@ function EditPostPage() {
       <span className={styles.titleEditPage}>Edit profile</span>
       <div className={styles.previewContainer}>
         <div className={styles.photoUserData}>
-          <div className={styles.avatarWrap}>
-            <img
-              src={selectedAvatarUrl || `${import.meta.env.VITE_BASE_URL}${me?.image}`}
-              alt="avatar"
-            />
-          </div>
+          {me?.image ? (
+            <div className={styles.avatarWrap}>
+              <img
+                src={selectedAvatarUrl || `${import.meta.env.VITE_BASE_URL}${me?.image}`}
+                alt="avatar"
+              />
+            </div>
+          ) : (
+            <img className={styles.regularAvatar} src={regularProfilPic} alt="regularProfilPic" />
+          )}
           <div>
             <span>{me?.username}</span>
             <span>{me?.about}</span>

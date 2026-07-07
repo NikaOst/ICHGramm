@@ -1,0 +1,116 @@
+.createPostContainer {
+  background-color: #ffffff;
+  width: 913px;
+  height: 562px;
+  border-radius: 12px;
+}
+
+.createPostHeader {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 16px;
+  gap: 350px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.uploadPic {
+  background-color: #fafafa;
+  width: 33.5rem;
+  height: 100%;
+  border-right: 1px solid #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0 0 12px;
+}
+
+.createPostBody {
+  display: flex;
+  height: 89.8%;
+}
+
+.createPostTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 0 18px 1rem;
+  width: 30rem;
+}
+.textareaBox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* width: 100%; */
+}
+.textareaBox img {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  max-width: 40px;
+  max-height: 40px;
+}
+.aboutWrap {
+  position: relative;
+}
+.aboutInput {
+  border: none;
+  flex: 1;
+  outline: none;
+  resize: none;
+  width: 21rem;
+  font-size: 0.87rem;
+  font-weight: 400;
+  line-height: 1.125rem;
+}
+.counterInside {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #737373;
+  pointer-events: none;
+}
+
+.avatarWrap {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatarWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.userDataBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.userDataBox span {
+  font-size: 0.87rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+}
+.createPostHeader span {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+.createPostHeader button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #0095f6;
+  font-size: 0.87rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+}
+.hiddenInput {
+  display: none;
+}

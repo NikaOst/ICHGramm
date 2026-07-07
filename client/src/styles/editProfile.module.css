@@ -98,7 +98,7 @@
   border-radius: 0.75rem;
   padding: 0.75rem 1.06rem 1.8rem 1.06rem;
   min-height: 7rem;
-  resize: vertical;
+  resize: none;
   font: inherit;
   box-sizing: border-box;
   font-size: 0.87rem;
@@ -133,4 +133,8 @@
 
 .websiteInput {
   padding-left: 2.25rem;
+}
+.regularAvatar {
+  width: 3.5rem;
+  height: 3.5rem;
 }
