@@ -1,13 +1,13 @@
 import PostCard from '../postCard';
 import styles from './postsGrid.module.css';
 
-function PostsGrid({ type, posts }) {
+function PostsGrid({ type, posts, onPostClick, onOpenMenu }) {
   return type === 'mainScreen' ? (
     <div className={styles.postsContainer}>
       <div className={styles.gridBox}>
         {posts?.map((post) => (
           <div key={post._id}>
-            <PostCard post={post} />
+            <PostCard post={post} onPostClick={onPostClick} onOpenMenu={onOpenMenu} />
           </div>
         ))}
       </div>
@@ -19,6 +19,7 @@ function PostsGrid({ type, posts }) {
           <img
             src={`${import.meta.env.VITE_BASE_URL}${post?.post?.image || post?.image}`}
             alt="postImg"
+            onClick={() => onPostClick?.(post)}
           />
         </div>
       ))}

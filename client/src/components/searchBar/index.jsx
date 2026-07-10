@@ -18,7 +18,7 @@ function SearchBar() {
 
   const handelSearch = (value) => {
     setSearchValue(value);
-    dispatch(searchUsers({ username: searchValue, name: searchValue }));
+    dispatch(searchUsers({ username: value, name: value }));
   };
 
   const goToAuthorProfile = (userId) => {
@@ -42,7 +42,7 @@ function SearchBar() {
       </div>
       {searchValue && (
         <div className={styles.usersContainer}>
-          <span className={styles.recentTitle}>Recent</span>
+          {/* <span className={styles.recentTitle}>Recent</span> */}
           {users?.map((user, id) => {
             return (
               <div key={id} className={styles.userContainer}>

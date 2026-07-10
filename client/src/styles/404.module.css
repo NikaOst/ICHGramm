@@ -1,0 +1,28 @@
+.main404PageContainer {
+  display: flex;
+  gap: 2.74rem;
+  padding: 5.87rem 0;
+}
+.main404PageContainer img {
+  width: 18.81rem;
+  height: 28.75rem;
+}
+.page404TextBox {
+  padding-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.page404Title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+}
+.page404Body {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: #737373;
+  display: flex;
+  flex-direction: column;
+}

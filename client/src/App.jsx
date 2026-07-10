@@ -21,6 +21,7 @@ function App() {
   const me = useSelector((state) => state.users.me);
   const myPosts = useSelector((state) => state.users.myPosts);
   const [activeOverlay, setActiveOverlay] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
     if (token && (!me || !myPosts)) {
@@ -38,25 +39,71 @@ function App() {
     );
   }
 
+  const handleOpenPostOverlay = (post) => {
+    setSelectedPost(post);
+    setActiveOverlay('post');
+  };
+
+  const handleOpenMenuPostOverlay = () => {
+    setActiveOverlay('postMenu');
+  };
+
   return (
     <div className="mainAppPage">
       <Navbar activeOverlay={activeOverlay} setActiveOverlay={setActiveOverlay} />
       <div className="mainPageNav">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                onOpenMenu={handleOpenMenuPostOverlay}
+                onPostClick={handleOpenPostOverlay}
+              />
+            }
+          />
           <Route path="/login" element={<Navigate to="/" replace />} />
           <Route path="/register" element={<Navigate to="/" replace />} />
           <Route path="/edit-profile" element={<EditPostPage />} />
           <Route path="/messages" element={<MessagePage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/profile/:id" element={<ProfilePage />} />
+          <Route
+            path="/explore"
+            element={
+              <ExplorePage
+                onOpenMenu={handleOpenMenuPostOverlay}
+                onPostClick={handleOpenPostOverlay}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProfilePage
+                onOpenMenu={handleOpenMenuPostOverlay}
+                onPostClick={handleOpenPostOverlay}
+              />
+            }
+          />
+          <Route
+            path="/profile/:id"
+            element={
+              <ProfilePage
+                onOpenMenu={handleOpenMenuPostOverlay}
+                onPostClick={handleOpenPostOverlay}
+              />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
       <Footer setActiveOverlay={setActiveOverlay} />
       {activeOverlay && (
-        <Overlay activeOverlay={activeOverlay} setActiveOverlay={setActiveOverlay} />
+        <Overlay
+          activeOverlay={activeOverlay}
+          setActiveOverlay={setActiveOverlay}
+          selectedPost={selectedPost}
+          setSelectedPost={setSelectedPost}
+        />
       )}
     </div>
   );

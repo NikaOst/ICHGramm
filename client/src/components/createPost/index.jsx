@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import regularProfilPic from '../../assets/icons/userRegular.svg';
 import { useState, useRef } from 'react';
 import { createPost, getAllPosts } from '../../redux/slices/postsSlice';
+import { getMe } from '../../redux/slices/usersSlice';
 
 function CreatePost({ setActiveOverlay }) {
   const { register, handleSubmit, watch } = useForm({ mode: 'onChange' });
@@ -47,6 +48,7 @@ function CreatePost({ setActiveOverlay }) {
 
     await dispatch(createPost({ body: data.body, image: selectedImage })).unwrap();
     await dispatch(getAllPosts()).unwrap();
+    await dispatch(getMe()).unwrap();
     setActiveOverlay(null);
   };
 

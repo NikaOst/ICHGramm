@@ -10,7 +10,7 @@ import { logout } from '../redux/slices/authSlice';
 import { getMe, followUser } from '../redux/slices/usersSlice';
 import regularProfilPic from '../assets/icons/userRegular.svg';
 
-function ProfilePage() {
+function ProfilePage({ onPostClick, onOpenMenu }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ function ProfilePage() {
         <div className={styles.userDataContainer}>
           <div className={styles.headerProfil}>
             <span>{profileUser?.username}</span>
-            {id && id !== me._id ? (
+            {id && id !== me?._id ? (
               <div>
                 <TargetButton
                   onClick={handleFollow}
@@ -108,7 +108,7 @@ function ProfilePage() {
           </div>
           <div className={styles.userData}>
             <span>
-              <strong>{profilePosts.length}</strong> posts
+              <strong>{profilePosts?.length ?? 0}</strong> posts
             </span>
             <span>
               <strong>{profileUser?.subscribers?.length}</strong> followers
@@ -134,7 +134,12 @@ function ProfilePage() {
       </div>
       {profilePosts.length ? (
         <div className={styles.mainExploreBox}>
-          <PostsGrid type="exploreScreen" posts={profilePosts} />
+          <PostsGrid
+            type="exploreScreen"
+            posts={profilePosts}
+            onPostClick={onPostClick}
+            onOpenMenu={onOpenMenu}
+          />
         </div>
       ) : (
         <div className={styles.noPostsBox}>

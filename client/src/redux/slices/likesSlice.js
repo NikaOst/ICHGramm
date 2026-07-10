@@ -4,7 +4,6 @@ import { logout } from './authSlice';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-// если выйти из аккаунта и зайти, то картинка сбиваться будет
 export const toggleLike = createAsyncThunk(
   '/likes/toggleLike',
   async (postId, { rejectWithValue, dispatch }) => {
@@ -34,7 +33,7 @@ export const toggleLike = createAsyncThunk(
 const likesSlice = createSlice({
   name: 'likes',
   initialState: {
-    byPostId: JSON.parse(localStorage.getItem('likedMap')) || {},
+    byPostId: {},
     status: null,
     error: null,
   },
@@ -51,9 +50,7 @@ const likesSlice = createSlice({
         state.byPostId[postId] = {
           liked: Boolean(action.payload.liked),
           likesCount: Number(action.payload.likesCount || 0),
-          authorId: String(action.payload.authorId),
         };
-        localStorage.setItem('likedMap', JSON.stringify(state.byPostId));
       })
       .addCase(toggleLike.rejected, (state, action) => {
         state.status = 'failed';
@@ -63,7 +60,6 @@ const likesSlice = createSlice({
         state.byPostId = {};
         state.status = null;
         state.error = null;
-        // localStorage.removeItem('likedMap');
       });
   },
 });

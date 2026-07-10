@@ -203,6 +203,7 @@ const usersSlice = createSlice({
       })
       .addCase(searchUsers.pending, (state) => {
         state.status = 'loading';
+        state.searchResults = [];
         state.error = null;
       })
       .addCase(searchUsers.fulfilled, (state, action) => {

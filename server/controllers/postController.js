@@ -1,5 +1,6 @@
 import Comment from '../models/Comment.js';
 import Post from '../models/Post.js';
+import { getPostsComments } from '../middlewares/getPostsComments.js';
 
 export const createPost = async (req, res) => {
   try {
@@ -46,7 +47,43 @@ export const deletePost = async (req, res) => {
     const userId = req.user.userId;
     const post = await Post.findOneAndDelete({ _id: req.params.id, author: userId });
     if (!post) return res.status(404).json('Post not found');
-    res.status(200).json('Post was deleted!');
+    await Comment.deleteMany({ post: req.params.id });
+    const postsArr = await Post.find()
+      .populate('author', 'username image')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'author',
+          select: 'username image',
+        },
+      });
+
+    const posts = postsArr.map((post) => {
+      const created = new Date(post.createdAt);
+      const now = new Date();
+
+      const diffMs = now - created;
+      const dayMs = 1000 * 60 * 60 * 24;
+      const diffDays = Math.floor(diffMs / dayMs);
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+
+      let dateStr = '';
+
+      if (diffDays < 7 && diffDays !== 0) {
+        dateStr = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+      } else if (diffDays === 0) {
+        dateStr = `${diffHours} h.`;
+      } else {
+        const diffWeeks = Math.floor(diffDays / 7);
+        dateStr = `${diffWeeks} week${diffWeeks !== 1 ? 's' : ''}`;
+      }
+
+      return {
+        ...post.toObject(),
+        date: dateStr,
+      };
+    });
+    res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }
@@ -54,19 +91,43 @@ export const deletePost = async (req, res) => {
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate('author', 'username image');
+    const postsArr = await Post.find()
+      .populate('author', 'username image')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'author',
+          select: 'username image',
+        },
+      });
 
-    const postsWithComments = await Promise.all(
-      posts.map(async (post) => {
-        const comments = await getPostsComments(post.id);
-        return {
-          post,
-          comments,
-        };
-      }),
-    );
+    const posts = postsArr.map((post) => {
+      const created = new Date(post.createdAt);
+      const now = new Date();
 
-    res.status(200).json(postsWithComments);
+      const diffMs = now - created;
+      const dayMs = 1000 * 60 * 60 * 24;
+      const diffDays = Math.floor(diffMs / dayMs);
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+
+      let dateStr = '';
+
+      if (diffDays < 7 && diffDays !== 0) {
+        dateStr = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+      } else if (diffDays === 0) {
+        dateStr = `${diffHours} h.`;
+      } else {
+        const diffWeeks = Math.floor(diffDays / 7);
+        dateStr = `${diffWeeks} week${diffWeeks !== 1 ? 's' : ''}`;
+      }
+
+      return {
+        ...post.toObject(),
+        date: dateStr,
+      };
+    });
+
+    res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }
@@ -74,27 +135,38 @@ export const getAllPosts = async (req, res) => {
 
 export const getPostById = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id).populate('author', 'username image');
+    const post = await Post.findById(req.params.id)
+      .populate('author', 'username image')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'author',
+          select: 'username image',
+        },
+      });
     if (!post) return res.status(404).json('Post not found');
 
-    const comments = await getPostsComments(post.id);
+    const created = new Date(post.createdAt);
+    const now = new Date();
 
-    res.status(200).json({
-      post,
-      comments,
-    });
+    const diffMs = now - created;
+    const dayMs = 1000 * 60 * 60 * 24;
+    const diffDays = Math.floor(diffMs / dayMs);
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+
+    let dateStr = '';
+
+    if (diffDays < 7) {
+      dateStr = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+    } else if (diffDays === 0) {
+      dateStr = `${diffHours} h.`;
+    } else {
+      const diffWeeks = Math.floor(diffDays / 7);
+      dateStr = `${diffWeeks} week${diffWeeks !== 1 ? 's' : ''}`;
+    }
+
+    res.status(200).json({ ...post.toObject(), date: dateStr });
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
-  }
-};
-
-const getPostsComments = async (postId) => {
-  try {
-    const comments = await Comment.find({ post: postId })
-      .populate('author', 'username')
-      .select('-post');
-    return comments;
-  } catch (error) {
-    return error;
   }
 };

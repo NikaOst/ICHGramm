@@ -1,12 +1,49 @@
 import Post from '../models/Post.js';
 import User from '../models/User.js';
+import Comment from '../models/Comment.js';
+// import { getPostsComments } from '../middlewares/getPostsComments.js';
 
 export const getMe = async (req, res) => {
   try {
     const user = await User.findById(req.user.userId)
       .select('-password')
       .populate('subscribers subscribes', 'name username');
-    const usersPosts = await Post.find({ author: req.user.userId });
+    const postsArr = await Post.find({ author: req.user.userId })
+      .populate('author', 'username image')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'author',
+          select: 'username image',
+        },
+      });
+
+    const usersPosts = postsArr.map((post) => {
+      const created = new Date(post.createdAt);
+      const now = new Date();
+
+      const diffMs = now - created;
+      const dayMs = 1000 * 60 * 60 * 24;
+      const diffDays = Math.floor(diffMs / dayMs);
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+
+      let dateStr = '';
+
+      if (diffDays < 7 && diffDays !== 0) {
+        dateStr = `${diffDays} day${diffDays !== 1 ? 's' : ''}`;
+      } else if (diffDays === 0) {
+        dateStr = `${diffHours} h.`;
+      } else {
+        const diffWeeks = Math.floor(diffDays / 7);
+        dateStr = `${diffWeeks} week${diffWeeks !== 1 ? 's' : ''}`;
+      }
+
+      return {
+        ...post.toObject(),
+        date: dateStr,
+      };
+    });
+
     res.status(200).json({ user, usersPosts });
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
@@ -72,12 +109,24 @@ export const getAllUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
   try {
     const userId = req.params.id;
+
     const user = await User.findById(userId)
       .select('-password')
       .populate('subscribers subscribes', 'name username');
+
     if (!user) return res.status(404).json('User not found');
-    const usersPosts = await Post.find({ author: userId });
-    res.status(200).json({ user, usersPosts });
+
+    const usersPostsRaw = await Post.find({ author: userId })
+      .populate('author', 'username image')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'author',
+          select: 'username image',
+        },
+      });
+
+    res.status(200).json({ user, usersPosts: usersPostsRaw });
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });
   }

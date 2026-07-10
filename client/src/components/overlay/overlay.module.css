@@ -17,3 +17,36 @@
   margin: 0 auto;
   margin-top: 5%;
 }
+
+.overlayPostPanel {
+  position: relative;
+  margin: 2.93rem auto 0;
+  z-index: 1001;
+  max-width: 980px;
+  width: calc(100% - 2rem);
+}
+
+.postDimmed {
+  filter: brightness(0.45);
+  pointer-events: none;
+  user-select: none;
+}
+
+.overlayPostMenuPanel {
+  position: absolute;
+  inset: 0;
+  z-index: 1002;
+}
+
+.overlayPostMenuBackdrop {
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.overlayPostMenuContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -8,14 +8,25 @@ import { followUser } from '../../redux/slices/usersSlice';
 import filledLike from '../../assets/icons/filledLike.svg';
 import { toggleLike } from '../../redux/slices/likesSlice';
 
-function PostCard({ post }) {
-  const me = useSelector((state) => state.users.me);
-  const likeState = useSelector((state) => state.likes.byPostId[String(post?.post?._id)]);
-
+function PostCard({ post, onPostClick }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const authorId = post?.post?.author?._id;
+  const me = useSelector((state) => state.users.me);
+
+  const authorId = post?.author?._id;
+  const postId = post?._id;
+  const meId = me?._id;
+
+  const likeState = useSelector((state) =>
+    postId ? state.likes.byPostId[String(postId)] : undefined,
+  );
+
+  const commentsFromStore = useSelector((state) =>
+    postId ? state.comments.byPostId[String(postId)] : undefined,
+  );
+
+  const comments = commentsFromStore ?? post?.comments ?? [];
 
   const goToAuthorProfile = () => {
     if (authorId) {
@@ -34,21 +45,25 @@ function PostCard({ post }) {
     return String(subId) === String(authorId);
   });
 
-  const isLiked = likeState?.liked ?? false;
-  const likesCount = likeState?.likesCount ?? post?.post?.likes;
-
   const handleToggleLike = () => {
-    dispatch(toggleLike(String(post?.post?._id)));
+    if (!postId) return;
+    dispatch(toggleLike(postId));
   };
+
+  const likesFromPost = post?.likes || [];
+  const likedByMeFromPost = likesFromPost.some((likeId) => String(likeId) === String(meId));
+
+  const isLiked = likeState?.liked ?? likedByMeFromPost;
+  const likesCount = likeState?.likesCount ?? likesFromPost.length;
 
   return (
     <div className={styles.card}>
       <div className={styles.mainPostData}>
         <div className={styles.headerPost}>
-          {post?.post?.author?.image ? (
+          {post?.author?.image || me?.image ? (
             <div className={styles.avatarWrap}>
               <img
-                src={`${import.meta.env.VITE_BASE_URL}${post?.post?.author?.image}`}
+                src={`${import.meta.env.VITE_BASE_URL}${post?.author?.image || me?.image}`}
                 alt="profilePic"
                 onClick={goToAuthorProfile}
               />
@@ -63,28 +78,28 @@ function PostCard({ post }) {
           )}
 
           <span className={styles.author} onClick={goToAuthorProfile}>
-            {post?.post?.author?.username}
+            {post?.author?.username}
           </span>
-          <span className={styles.createPost}>• wek • </span>
-          {me?.username !== post?.post?.author?.username && (
+          <span className={styles.createPost}>• {post?.date} • </span>
+          {me?.username !== post?.author?.username && (
             <button onClick={handleFollow}>{isFollowing ? 'unfollow' : 'follow'}</button>
           )}
         </div>
         <div className={styles.postImgContaier}>
-          <img src={`${import.meta.env.VITE_BASE_URL}${post?.post?.image}`} alt="PostImg" />
+          <img src={`${import.meta.env.VITE_BASE_URL}${post?.image}`} alt="PostImg" />
         </div>
         <div className={styles.likeCommentBar}>
           <img src={isLiked ? filledLike : likeImg} alt="likeImg" onClick={handleToggleLike} />
-          <img src={commentImg} alt="commentImg" />
+          <img src={commentImg} alt="commentImg" onClick={() => onPostClick?.(post)} />
         </div>
         <span className={styles.likesSpan}>{likesCount} likes</span>
       </div>
       <div className={styles.mainPostData}>
         <div className={styles.postBody}>
-          <span>{post?.post?.body}... </span>
+          <span>{post?.body}... </span>
           <button>more</button>
         </div>
-        <span className={styles.commentsSpan}>{post?.comments?.length} comments</span>
+        <span className={styles.commentsSpan}>{comments?.length ?? 0} comments</span>
       </div>
     </div>
   );

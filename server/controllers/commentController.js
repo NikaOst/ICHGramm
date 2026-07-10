@@ -8,6 +8,9 @@ export const commentPost = async (req, res) => {
     const postId = req.params.id;
 
     const newComment = await Comment.create({ body, author: authorId, post: postId });
+    const post = await Post.findById(postId);
+    post.comments.push(newComment.id);
+    await post.save();
     res.status(201).json(newComment);
   } catch (error) {
     res.status(500).json({ error: error.message, message: 'Internal server error' });

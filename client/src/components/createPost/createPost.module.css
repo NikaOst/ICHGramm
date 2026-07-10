@@ -1,16 +1,16 @@
 .createPostContainer {
   background-color: #ffffff;
-  width: 913px;
-  height: 562px;
-  border-radius: 12px;
+  width: 57.06rem;
+  height: 35.125rem;
+  border-radius: 0.75rem;
 }
 
 .createPostHeader {
   display: flex;
   justify-content: end;
   align-items: center;
-  padding: 16px;
-  gap: 350px;
+  padding: 1rem;
+  gap: 21.87rem;
   border-bottom: 1px solid #dbdbdb;
 }
 
@@ -22,7 +22,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0 0 0 12px;
+  border-radius: 0 0 0 0.75rem;
 }
 
 .createPostBody {
@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 18px 0 18px 1rem;
+  padding: 1.125rem 0 1.125rem 1rem;
   width: 30rem;
 }
 .textareaBox {
@@ -79,6 +79,11 @@
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
+}
+
+.regularAvatar {
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 .avatarWrap img {

@@ -36,6 +36,25 @@ export const createPost = createAsyncThunk(
   },
 );
 
+// http://127.0.0.1:3333/posts/:id
+
+export const deletePost = createAsyncThunk(
+  'posts/deletePost',
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+
+      const response = await axios.delete(`${BASE_URL}/posts/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  },
+);
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState: {
@@ -73,6 +92,18 @@ const postsSlice = createSlice({
         state.status = 'succeeded';
       })
       .addCase(createPost.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(deletePost.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.posts = action.payload;
+      })
+      .addCase(deletePost.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       });
