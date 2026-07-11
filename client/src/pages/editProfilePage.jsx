@@ -42,6 +42,9 @@ function EditPostPage() {
     return selectedAvatar ? URL.createObjectURL(selectedAvatar) : '';
   }, [selectedAvatar]);
 
+  const previewSrc =
+    selectedAvatarUrl || (me?.image ? `${import.meta.env.VITE_BASE_URL}${me.image}` : '');
+
   useEffect(() => {
     return () => {
       if (selectedAvatarUrl) URL.revokeObjectURL(selectedAvatarUrl);
@@ -53,12 +56,9 @@ function EditPostPage() {
       <span className={styles.titleEditPage}>Edit profile</span>
       <div className={styles.previewContainer}>
         <div className={styles.photoUserData}>
-          {me?.image ? (
+          {previewSrc ? (
             <div className={styles.avatarWrap}>
-              <img
-                src={selectedAvatarUrl || `${import.meta.env.VITE_BASE_URL}${me?.image}`}
-                alt="avatar"
-              />
+              <img src={previewSrc} alt="avatar" />
             </div>
           ) : (
             <img className={styles.regularAvatar} src={regularProfilPic} alt="regularProfilPic" />
