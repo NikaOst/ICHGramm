@@ -5,6 +5,7 @@ import { deletePost } from '../../redux/slices/postsSlice.js';
 import { useLocation } from 'react-router-dom';
 import { getMe } from '../../redux/slices/usersSlice';
 import { useState } from 'react';
+import BetaV from '../betaV/index.jsx';
 
 function MenuPostWindow({ post, onCancel, onCloseAllWindows }) {
   const dispatch = useDispatch();
@@ -42,8 +43,11 @@ function MenuPostWindow({ post, onCancel, onCloseAllWindows }) {
           Delete
         </span>
       </div>
-      <div>
+      <div className={styles.editContainer}>
         <span className={styles.editSpan}>Edit</span>
+        <div className={styles.betaContainer}>
+          <BetaV />
+        </div>
       </div>
       <div>
         <span onClick={handelGoToPosts} className={styles.goToPostsSpan}>

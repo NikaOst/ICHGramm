@@ -138,3 +138,136 @@
   width: 3.5rem;
   height: 3.5rem;
 }
+
+@media (max-width: 1024px) {
+  .mainEditPage {
+    width: min(80%, 48rem);
+    margin: 2rem auto;
+  }
+
+  .previewContainer {
+    padding: 0.9rem 1rem;
+    gap: 1rem;
+  }
+
+  .photoUserData {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainEditPage {
+    width: calc(100% - 2rem);
+    margin: 1.5rem auto;
+  }
+
+  .titleEditPage {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.35rem;
+  }
+
+  .previewContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .photoUserData {
+    width: 100%;
+    align-items: center;
+  }
+
+  .avatarWrap,
+  .regularAvatar {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .photoUserData div {
+    gap: 0.35rem;
+  }
+
+  .photoUserData div span:first-child {
+    font-size: 0.95rem;
+    line-height: 1.15rem;
+  }
+
+  .photoUserData div span:last-child {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
+
+  .inputTitle {
+    font-size: 0.95rem;
+    line-height: 1.15rem;
+  }
+
+  .formInput,
+  .aboutInput {
+    font-size: 0.84rem;
+    line-height: 1.05rem;
+  }
+
+  .form > div:last-of-type {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainEditPage {
+    width: calc(100% - 1rem);
+    margin: 1rem auto;
+  }
+
+  .previewContainer {
+    border-radius: 1rem;
+    padding: 0.85rem;
+  }
+
+  .photoUserData {
+    gap: 0.75rem;
+  }
+
+  .avatarWrap,
+  .regularAvatar {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .titleEditPage {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+
+  .form div {
+    margin-bottom: 1rem;
+  }
+
+  .formInput {
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.65rem;
+  }
+
+  .aboutInput {
+    padding: 0.7rem 0.9rem 1.7rem 0.9rem;
+    min-height: 6rem;
+    border-radius: 0.65rem;
+  }
+
+  .counterInside {
+    right: 0.65rem;
+    bottom: 0.45rem;
+    font-size: 0.7rem;
+  }
+
+  .websiteInput {
+    padding-left: 2rem;
+  }
+
+  .websiteInputWrap img {
+    left: 0.65rem;
+  }
+}

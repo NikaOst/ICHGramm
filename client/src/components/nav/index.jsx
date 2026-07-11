@@ -9,6 +9,7 @@ import create from '../../assets/icons/createImg.svg';
 import regularProfilPic from '../../assets/icons/userRegular.svg';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import BetaV from '../betaV';
 
 function Navbar({ activeOverlay, setActiveOverlay }) {
   const me = useSelector((state) => state.users.me);
@@ -23,7 +24,6 @@ function Navbar({ activeOverlay, setActiveOverlay }) {
         <img className={styles.navLogo} src={logo} alt="logo" />
         <div className={styles.navMenu}>
           <div className={styles.navPage}>
-            <img src={home} alt="homePic" />
             <NavLink
               to="/"
               end
@@ -32,15 +32,24 @@ function Navbar({ activeOverlay, setActiveOverlay }) {
                 activeOverlay !== 'search' &&
                 activeOverlay !== 'notifications' &&
                 activeOverlay !== 'create'
-                  ? styles.navButtonActive
-                  : styles.navButton
+                  ? `${styles.navButtonActive} ${styles.navLinkRow}`
+                  : `${styles.navButton} ${styles.navLinkRow}`
               }
               onClick={() => setActiveOverlay(null)}>
-              Home
+              {({ isActive }) => (
+                <>
+                  <img
+                    src={home}
+                    alt="homePic"
+                    className={isActive ? styles.navIconActive : styles.navIcon}
+                  />
+                  <span className={styles.navLabel}>Home</span>
+                </>
+              )}
             </NavLink>
           </div>
           <div className={styles.navPage}>
-            <img src={search} alt="searchPic" />
+            <img onClick={() => toggleOverlay('search')} src={search} alt="searchPic" />
             <button
               onClick={() => toggleOverlay('search')}
               className={activeOverlay === 'search' ? styles.navButtonActive : styles.navButton}>
@@ -48,49 +57,66 @@ function Navbar({ activeOverlay, setActiveOverlay }) {
             </button>
           </div>
           <div className={styles.navPage}>
-            <img src={explore} alt="explorePic" />
             <NavLink
               to="/explore"
+              end
               className={({ isActive }) =>
                 isActive &&
                 activeOverlay !== 'search' &&
                 activeOverlay !== 'notifications' &&
                 activeOverlay !== 'create'
-                  ? styles.navButtonActive
-                  : styles.navButton
+                  ? `${styles.navButtonActive} ${styles.navLinkRow}`
+                  : `${styles.navButton} ${styles.navLinkRow}`
               }
               onClick={() => setActiveOverlay(null)}>
-              Explore
+              {({ isActive }) => (
+                <>
+                  <img
+                    src={explore}
+                    alt="explorePic"
+                    className={isActive ? styles.navIconActive : styles.navIcon}
+                  />
+                  <span className={styles.navLabel}>Explore</span>
+                </>
+              )}
             </NavLink>
           </div>
-          <div className={styles.navPage}>
-            <img src={messages} alt="messagePic" />
+          <div className={`${styles.navPage} ${styles.beta}`}>
             <NavLink
-              to="/messages"
-              className={({ isActive }) =>
-                isActive &&
-                activeOverlay !== 'search' &&
-                activeOverlay !== 'notifications' &&
-                activeOverlay !== 'create'
-                  ? styles.navButtonActive
-                  : styles.navButton
-              }
+              // to="/messages"
+              // end
+              className={({ isActive }) => isActive && `${styles.navButton} ${styles.navLinkRow}`}
               onClick={() => setActiveOverlay(null)}>
-              Messages
+              {({ isActive }) => (
+                <>
+                  <img
+                    src={messages}
+                    alt="messagePic"
+                    className={isActive ? styles.navIconActive : styles.navIcon}
+                  />
+                  <span className={styles.navLabel}>Messages</span>
+                </>
+              )}
             </NavLink>
+            <div className={styles.betaLabel}>
+              <BetaV />
+            </div>
           </div>
-          <div className={styles.navPage}>
+          <div className={`${styles.navPage} ${styles.beta}`}>
             <img src={notifications} alt="notificPic" />
             <button
-              onClick={() => toggleOverlay('notifications')}
+              // onClick={() => toggleOverlay('notifications')}
               className={
                 activeOverlay === 'notifications' ? styles.navButtonActive : styles.navButton
               }>
               Notifications
             </button>
+            <div className={styles.betaLabel}>
+              <BetaV />
+            </div>
           </div>
           <div className={styles.navPage}>
-            <img src={create} alt="createPic" />
+            <img onClick={() => toggleOverlay('create')} src={create} alt="createPic" />
             <button
               onClick={() => toggleOverlay('create')}
               className={activeOverlay === 'create' ? styles.navButtonActive : styles.navButton}>
@@ -99,26 +125,34 @@ function Navbar({ activeOverlay, setActiveOverlay }) {
           </div>
         </div>
         <div className={styles.navPage}>
-          <div className={styles.avatarWrap}>
-            {me?.image ? (
-              <img src={`${import.meta.env.VITE_BASE_URL}${me.image}`} alt="profilePic" />
-            ) : (
-              <img className={styles.regularAvatar} src={regularProfilPic} alt="regularProfilPic" />
-            )}
-          </div>
-
           <NavLink
             to="/profile"
+            end
             className={({ isActive }) =>
               isActive &&
               activeOverlay !== 'search' &&
               activeOverlay !== 'notifications' &&
               activeOverlay !== 'create'
-                ? styles.navButtonActive
-                : styles.navButton
+                ? `${styles.navButtonActive} ${styles.navLinkRow}`
+                : `${styles.navButton} ${styles.navLinkRow}`
             }
             onClick={() => setActiveOverlay(null)}>
-            Profile
+            {() => (
+              <>
+                <div className={styles.avatarWrap}>
+                  {me?.image ? (
+                    <img src={`${import.meta.env.VITE_BASE_URL}${me.image}`} alt="profilePic" />
+                  ) : (
+                    <img
+                      className={styles.regularAvatar}
+                      src={regularProfilPic}
+                      alt="regularProfilPic"
+                    />
+                  )}
+                </div>
+                <span className={styles.navLabel}>Profile</span>
+              </>
+            )}
           </NavLink>
         </div>
       </div>

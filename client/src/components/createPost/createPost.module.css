@@ -119,3 +119,49 @@
 .hiddenInput {
   display: none;
 }
+
+@media (max-width: 1024px) {
+  .createPostContainer {
+    width: min(57.06rem, 60vw);
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .createPostHeader {
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .createPostBody {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .uploadPic {
+    width: 100%;
+    min-height: 16rem;
+    border-right: none;
+    border-bottom: 1px solid #dbdbdb;
+    border-radius: 0;
+  }
+
+  .createPostTextContainer {
+    width: 100%;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .aboutWrap {
+    width: 100%;
+  }
+
+  .aboutInput {
+    width: 100%;
+  }
+
+  .textareaBox img {
+    max-width: 32px;
+    max-height: 32px;
+  }
+}

@@ -12,3 +12,21 @@
   min-height: 0;
   margin-left: 20.18rem;
 }
+
+@media (max-width: 1200px) {
+  .mainPageNav {
+    margin-left: 15.25rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .mainPageNav {
+    margin-left: 12.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainPageNav {
+    margin-left: 6rem;
+  }
+}

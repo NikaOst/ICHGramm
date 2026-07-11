@@ -123,3 +123,12 @@
   object-fit: contain;
   display: block;
 }
+.postDescClamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.postBody span {
+  margin-right: 0.5rem;
+}

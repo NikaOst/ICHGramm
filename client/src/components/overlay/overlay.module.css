@@ -50,3 +50,40 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 1200px) {
+  .overlayPanel {
+    margin-left: 12.5rem;
+  }
+  .overlayPostPanel {
+    margin-left: 14%;
+  }
+}
+
+@media (max-width: 992px) {
+  .overlayPanel {
+    margin-left: 11rem;
+  }
+  .overlayPostPanel {
+    margin-left: 8%;
+  }
+}
+@media (max-width: 860px) {
+  .overlayPostPanel {
+    margin-left: 3%;
+  }
+}
+@media (max-width: 768px) {
+  .overlayPanel {
+    margin-left: 4.8rem;
+  }
+  .overlayPostPanel {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .overlayPostPanel {
+    margin-left: 0;
+  }
+}

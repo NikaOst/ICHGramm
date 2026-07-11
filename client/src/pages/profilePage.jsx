@@ -3,16 +3,26 @@ import link from '../assets/icons/link.svg';
 import PostsGrid from '../components/postsGrid';
 import styles from '../styles/profile.module.css';
 import TargetButton from '../components/blueMainButton';
-import { useEffect } from 'react';
 import { getUserById } from '../redux/slices/usersSlice';
 import { useParams, useNavigate } from 'react-router-dom';
 import { logout } from '../redux/slices/authSlice';
 import { getMe, followUser } from '../redux/slices/usersSlice';
 import regularProfilPic from '../assets/icons/userRegular.svg';
+import { useRef, useEffect, useState } from 'react';
 
 function ProfilePage({ onPostClick, onOpenMenu }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const descRef = useRef(null);
+  const [shortText, setShortText] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  useEffect(() => {
+    if (descRef.current) {
+      setIsOverflowing(descRef.current.scrollHeight > descRef.current.clientHeight);
+    }
+  }, []);
 
   const { id } = useParams();
 
@@ -119,15 +129,21 @@ function ProfilePage({ onPostClick, onOpenMenu }) {
           </div>
           {profileUser?.about && (
             <div className={styles.aboutBox}>
-              <span>{profileUser?.about}... </span>
-              <button>more</button>
+              <span ref={descRef} className={shortText ? '' : styles.profilDescClamped}>
+                {profileUser?.about}
+              </span>
+              {isOverflowing && (
+                <button type="button" onClick={() => setShortText((prev) => !prev)}>
+                  {!shortText ? ' more' : ' less'}
+                </button>
+              )}
             </div>
           )}
 
           {profileUser?.website && (
             <div className={styles.websiteBox}>
               <img src={link} alt="linkImg" />
-              <a href="">{profileUser?.website}</a>
+              <a href={profileUser?.website}>{profileUser?.website}</a>
             </div>
           )}
         </div>

@@ -7,10 +7,21 @@ import { useNavigate } from 'react-router-dom';
 import { followUser } from '../../redux/slices/usersSlice';
 import filledLike from '../../assets/icons/filledLike.svg';
 import { toggleLike } from '../../redux/slices/likesSlice';
+import { useRef, useEffect, useState } from 'react';
 
 function PostCard({ post, onPostClick }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const descRef = useRef(null);
+  const [shortText, setShortText] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  useEffect(() => {
+    if (descRef.current) {
+      setIsOverflowing(descRef.current.scrollHeight > descRef.current.clientHeight);
+    }
+  }, []);
 
   const me = useSelector((state) => state.users.me);
 
@@ -96,8 +107,14 @@ function PostCard({ post, onPostClick }) {
       </div>
       <div className={styles.mainPostData}>
         <div className={styles.postBody}>
-          <span>{post?.body}... </span>
-          <button>more</button>
+          <span ref={descRef} className={shortText ? '' : styles.postDescClamped}>
+            {post?.body}
+          </span>
+          {isOverflowing && (
+            <button type="button" onClick={() => setShortText((prev) => !prev)}>
+              {!shortText ? ' more' : ' less'}
+            </button>
+          )}
         </div>
         <span className={styles.commentsSpan}>{comments?.length ?? 0} comments</span>
       </div>
