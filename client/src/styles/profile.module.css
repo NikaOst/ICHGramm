@@ -107,6 +107,17 @@
   margin-right: 0.5rem;
 }
 
+.buttonBox {
+  position: relative;
+}
+.betaContainer {
+  position: absolute;
+  top: -0.5rem;
+  right: 0;
+  width: auto;
+  height: auto;
+}
+
 @media (max-width: 1024px) {
   .profileMainBox {
     padding: 2rem 1.75rem;

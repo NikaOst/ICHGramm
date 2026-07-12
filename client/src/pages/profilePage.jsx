@@ -9,6 +9,7 @@ import { logout } from '../redux/slices/authSlice';
 import { getMe, followUser } from '../redux/slices/usersSlice';
 import regularProfilPic from '../assets/icons/userRegular.svg';
 import { useRef, useEffect, useState } from 'react';
+import BetaV from '../components/betaV';
 
 function ProfilePage({ onPostClick, onOpenMenu }) {
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ function ProfilePage({ onPostClick, onOpenMenu }) {
           <div className={styles.headerProfil}>
             <span>{profileUser?.username}</span>
             {id && id !== me?._id ? (
-              <div>
+              <div className={styles.buttonBox}>
                 <TargetButton
                   onClick={handleFollow}
                   type="button"
@@ -94,6 +95,9 @@ function ProfilePage({ onPostClick, onOpenMenu }) {
                   color="#000000"
                   padding="0.46rem 4rem"
                 />
+                <div className={styles.betaContainer}>
+                  <BetaV />
+                </div>
               </div>
             ) : (
               <div>
