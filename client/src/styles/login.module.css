@@ -1,0 +1,80 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.loginMainContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.loginMainForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.62rem;
+  width: 21.8rem;
+}
+
+.loginForm {
+  border: 1px solid #dbdbdb;
+  padding: 1.8rem 2.5rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm .loginLogo {
+  margin-bottom: 0.2rem;
+}
+
+.loginLogo img {
+  display: block;
+  margin: 0 auto;
+  width: 11.8rem;
+  height: 6.62rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.37rem;
+  margin-bottom: 0.87rem;
+}
+
+.submitButton {
+  padding: 0.87rem 0 1.75rem 0;
+}
+
+.submitButton button {
+  width: 100%;
+}
+
+.dividerBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.125rem;
+  font-size: 0.8rem;
+  color: #737373;
+  font-weight: 600;
+  line-height: 0.93rem;
+  margin-bottom: 4.31rem;
+}
+
+.forgotPasswordBox {
+  color: #00376b;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+.serverError {
+  margin-top: 0.5rem;
+  color: #e53935;
+  font-size: 0.87rem;
+  text-align: center;
+}

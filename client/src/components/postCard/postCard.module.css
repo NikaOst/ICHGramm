@@ -1,0 +1,134 @@
+.card {
+  width: 100%;
+  min-width: 0;
+  max-width: 25rem;
+  border-bottom: 0.86px solid #dbdbdb;
+  padding-bottom: 2.31rem;
+}
+
+.mainPostData {
+  display: flex;
+  flex-direction: column;
+  gap: 0.64rem;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.regularAvatar {
+  width: 1.62rem;
+  height: 1.62rem;
+}
+
+.headerPost {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.avatarWrap {
+  width: 1.62rem;
+  height: 1.62rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.avatarWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.author,
+.headerPost img {
+  cursor: pointer;
+}
+
+.author,
+.createPost {
+  font-size: 0.75rem;
+  line-height: 0.96rem;
+}
+
+.author,
+.headerPost button,
+.likesSpan {
+  font-weight: 600;
+}
+
+.likesSpan {
+  margin-bottom: 0.75rem;
+}
+
+.createPost,
+.commentsSpan,
+.postBody button {
+  color: #737373;
+  font-weight: 400;
+}
+
+.headerPost button {
+  background-color: transparent;
+  border: none;
+  color: #0095f6;
+  cursor: pointer;
+}
+
+.likeCommentBar {
+  display: flex;
+  gap: 0.86rem;
+}
+
+.likeCommentBar img {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.likesSpan,
+.postTitle,
+.postBody,
+.commentsSpan {
+  font-size: 0.75rem;
+  line-height: 0.96rem;
+}
+
+.postTitle {
+  margin-bottom: 0.6rem;
+}
+
+.postBody button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.postImgContaier {
+  width: 100%;
+  height: 505px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+}
+
+.postImgContaier img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.postDescClamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.postBody span {
+  margin-right: 0.5rem;
+}

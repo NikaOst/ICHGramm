@@ -1,0 +1,40 @@
+.mainMenuContainer {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.75rem;
+  width: 25rem;
+}
+
+.mainMenuContainer > div {
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.mainMenuContainer > div:last-child {
+  border: none;
+}
+.mainMenuContainer > div span {
+  font-size: 0.87rem;
+  font-weight: 400;
+  line-height: 1.31rem;
+}
+.mainMenuContainer > div .deleteSpan {
+  color: #ed4956;
+  font-weight: 700;
+}
+.copyLinkSpanCopied {
+  color: green;
+}
+.editContainer {
+  position: relative;
+}
+.betaContainer {
+  position: absolute;
+  top: 0.8rem;
+  right: 8rem;
+  width: auto;
+  height: auto;
+}

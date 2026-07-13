@@ -1,0 +1,89 @@
+.overlayBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  display: flex;
+  color: black;
+}
+
+.overlayPanel {
+  margin-left: 15.25rem;
+  margin-top: 0;
+  z-index: 1001;
+}
+
+.overlayCreatePanel {
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+.overlayPostPanel {
+  position: relative;
+  margin: 2.93rem auto 0;
+  z-index: 1001;
+  max-width: 980px;
+  width: calc(100% - 2rem);
+}
+
+.postDimmed {
+  filter: brightness(0.45);
+  pointer-events: none;
+  user-select: none;
+}
+
+.overlayPostMenuPanel {
+  position: absolute;
+  inset: 0;
+  z-index: 1002;
+}
+
+.overlayPostMenuBackdrop {
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.overlayPostMenuContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1200px) {
+  .overlayPanel {
+    margin-left: 12.5rem;
+  }
+  .overlayPostPanel {
+    margin-left: 14%;
+  }
+}
+
+@media (max-width: 992px) {
+  .overlayPanel {
+    margin-left: 11rem;
+  }
+  .overlayPostPanel {
+    margin-left: 8%;
+  }
+}
+@media (max-width: 860px) {
+  .overlayPostPanel {
+    margin-left: 3%;
+  }
+}
+@media (max-width: 768px) {
+  .overlayPanel {
+    margin-left: 4.8rem;
+  }
+  .overlayPostPanel {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .overlayPostPanel {
+    margin-left: 0;
+  }
+}

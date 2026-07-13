@@ -1,0 +1,320 @@
+.mainPostContainer {
+  display: flex;
+  background-color: #ffffff;
+  width: 62.5rem;
+  height: 45.125rem;
+}
+
+.leftSideImg {
+  width: 55%;
+  height: 100%;
+  overflow: hidden;
+}
+.leftSideImg img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.rightSidePost {
+  width: 45%;
+}
+.dataPost {
+  display: flex;
+  flex-direction: column;
+  gap: 0.71rem;
+}
+.commentsContainer,
+.postTextContainer,
+.likePost {
+  padding: 0.56rem 0.87rem;
+}
+.postTextContainer {
+  display: flex;
+  gap: 0.95rem;
+}
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 0.39rem;
+}
+.likePost {
+  display: flex;
+  flex-direction: column;
+  gap: 0.87rem;
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+}
+.likesText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  width: 100%;
+}
+.postTextContainer {
+  border-top: 1px solid #dbdbdb;
+}
+.sendCommentContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  padding: 0.56rem 0.87rem;
+  box-sizing: border-box;
+}
+.sendCommentContainer img {
+  cursor: pointer;
+}
+.commentInput {
+  width: 100%;
+  padding: 9px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+.postMainContainer {
+  display: flex;
+  flex-direction: column;
+  height: 86%;
+  justify-content: space-between;
+}
+.imageWraper,
+.wrapCommentImg {
+  display: flex;
+  align-items: center;
+  width: 1.68rem;
+  height: 1.68rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.imageWraper img,
+.wrapCommentImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sendCommentContainer button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #0095f6;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 0.95rem;
+}
+.commentWrap {
+  flex: 1;
+  min-width: 0;
+}
+.likesText span:first-child {
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 0.95rem;
+}
+.likesText span:last-child,
+.timeCreate {
+  font-size: 0.63rem;
+  font-weight: 400;
+  line-height: 0.85rem;
+  color: #737373;
+}
+.authorUsername,
+.postBody,
+.commentAuthorData span {
+  font-size: 0.74rem;
+  line-height: 0.95rem;
+}
+.authorUsername,
+.commentAuthorData span:first-child {
+  font-weight: 600;
+}
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.58rem;
+  max-height: 25rem;
+  overflow-y: auto;
+}
+.commentsContainer > div {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  padding: 0.62rem 0;
+}
+.commentAuthorData {
+  display: flex;
+  gap: 0.21rem;
+}
+.noComments {
+  font-size: 0.74rem;
+  line-height: 0.95rem;
+  font-weight: 600;
+}
+.likePost div img {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.likePost div {
+  display: flex;
+  gap: 0.84rem;
+}
+
+@media (max-width: 1200px) {
+  .mainPostContainer {
+    flex-direction: column;
+    width: min(36rem, 92vw);
+    height: auto;
+  }
+
+  .leftSideImg {
+    width: 100%;
+    height: 15rem;
+    flex-shrink: 0;
+  }
+
+  .rightSidePost {
+    width: 100%;
+  }
+
+  .postMainContainer {
+    height: auto;
+  }
+
+  .commentsContainer,
+  .postTextContainer,
+  .likePost,
+  .sendCommentContainer {
+    padding: 0.5rem 0.7rem;
+  }
+
+  .commentsContainer {
+    max-height: 8rem;
+    gap: 0.45rem;
+  }
+
+  .commentsContainer > div {
+    gap: 0.75rem;
+    padding: 0.45rem 0;
+  }
+
+  .authorUsername,
+  .postBody,
+  .commentAuthorData span,
+  .noComments,
+  .likesText span:first-child {
+    font-size: 0.68rem;
+    line-height: 0.88rem;
+  }
+
+  .likesText span:last-child,
+  .timeCreate,
+  .sendCommentContainer button {
+    font-size: 0.58rem;
+    line-height: 0.78rem;
+  }
+
+  .likePost div img {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+
+  .imageWraper,
+  .wrapCommentImg {
+    width: 1.45rem;
+    height: 1.45rem;
+  }
+
+  .commentInput {
+    padding: 0.35rem 0;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainPostContainer {
+    width: 100%;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+
+  .leftSideImg {
+    height: 16rem;
+  }
+
+  .commentsContainer,
+  .postTextContainer,
+  .likePost,
+  .sendCommentContainer {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .commentsContainer {
+    max-height: 12rem;
+  }
+
+  .authorUsername,
+  .postBody,
+  .commentAuthorData span,
+  .noComments,
+  .likesText span:first-child {
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+  }
+
+  .likesText span:last-child,
+  .timeCreate,
+  .sendCommentContainer button {
+    font-size: 0.62rem;
+    line-height: 0.82rem;
+  }
+
+  .likePost div img {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .imageWraper,
+  .wrapCommentImg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainPostContainer {
+    width: 100%;
+    max-height: calc(100vh - 1rem);
+  }
+
+  .leftSideImg {
+    height: 13rem;
+  }
+
+  .commentsContainer {
+    max-height: 10rem;
+    gap: 0.45rem;
+  }
+
+  .commentsContainer > div {
+    gap: 0.7rem;
+    padding: 0.45rem 0;
+  }
+
+  .commentAuthorData {
+    gap: 0.15rem;
+    flex-wrap: wrap;
+  }
+
+  .sendCommentContainer {
+    gap: 0.45rem;
+  }
+
+  .commentInput {
+    padding: 0.45rem 0;
+    font-size: 0.78rem;
+  }
+}

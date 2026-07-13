@@ -1,0 +1,89 @@
+.footerMainBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 1rem 3rem;
+  gap: 2rem;
+  background-color: white;
+}
+
+.footerMenu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  max-width: 900px;
+}
+
+.footerMenuOption,
+.footerMainBox {
+  color: #737373;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  text-decoration: none;
+}
+
+.footerMenu button {
+  background-color: transparent;
+  border: none;
+  color: #737373;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  line-height: inherit;
+}
+
+@media (max-width: 992px) {
+  .footerMainBox {
+    padding: 1.25rem 0.75rem 2.5rem;
+    gap: 1.5rem;
+  }
+
+  .footerMenu {
+    gap: 0.75rem 1.1rem;
+  }
+
+  .footerMenuOption,
+  .footerMainBox {
+    font-size: 0.7rem;
+    line-height: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerMainBox {
+    padding: 1rem 0.5rem 2rem;
+    gap: 1rem;
+  }
+
+  .footerMenu {
+    gap: 0.55rem 0.9rem;
+  }
+
+  .footerMenuOption,
+  .footerMainBox {
+    font-size: 0.66rem;
+    line-height: 0.9rem;
+  }
+
+  .footerMainBox > span {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerMenu {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    max-width: 320px;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .footerMenuOption,
+  .footerMenu button {
+    text-align: center;
+  }
+}

@@ -1,0 +1,19 @@
+.mainHomeBox {
+  width: 100%;
+  min-height: 100%;
+  padding: 3.62rem 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2.37rem;
+}
+
+.postsContainer {
+  width: 80%;
+}
+
+@media (min-width: 768px) {
+  .mainHomeBox {
+    padding: 3.62rem 0;
+  }
+}

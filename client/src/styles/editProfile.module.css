@@ -1,0 +1,273 @@
+.mainEditPage {
+  width: 60%;
+  margin: 3rem;
+}
+
+.previewContainer {
+  background-color: #efefef;
+  border-radius: 1.25rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.06rem;
+}
+
+.photoUserData {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 60%;
+}
+
+.avatarWrap {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatarWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoUserData div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.56rem;
+}
+
+.titleEditPage {
+  display: block;
+  margin-bottom: 2.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.56rem;
+}
+
+.photoUserData div span:first-child {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+}
+
+.photoUserData div span:last-child {
+  font-size: 0.87rem;
+  font-weight: 400;
+  line-height: 1.125rem;
+  color: #737373;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.43rem;
+  margin-bottom: 1.43rem;
+}
+
+.inputTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+}
+
+.form > div:last-of-type {
+  margin-bottom: 4.81rem;
+}
+
+.formInput {
+  border: 1px solid #dbdbdb;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.06rem;
+  font-size: 0.87rem;
+  font-weight: 400;
+  line-height: 1.125rem;
+}
+
+.aboutInputWrap {
+  position: relative;
+}
+
+.aboutInput {
+  width: 100%;
+  border: 1px solid #dbdbdb;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.06rem 1.8rem 1.06rem;
+  min-height: 7rem;
+  resize: none;
+  font: inherit;
+  box-sizing: border-box;
+  font-size: 0.87rem;
+  font-weight: 400;
+  line-height: 1.125rem;
+}
+
+.counterInside {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #737373;
+  pointer-events: none;
+}
+
+.websiteInputWrap {
+  position: relative;
+}
+
+.websiteInputWrap img {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.75rem;
+  height: 0.75rem;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.websiteInput {
+  padding-left: 2.25rem;
+}
+.regularAvatar {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+@media (max-width: 1024px) {
+  .mainEditPage {
+    width: min(80%, 48rem);
+    margin: 2rem auto;
+  }
+
+  .previewContainer {
+    padding: 0.9rem 1rem;
+    gap: 1rem;
+  }
+
+  .photoUserData {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainEditPage {
+    width: calc(100% - 2rem);
+    margin: 1.5rem auto;
+  }
+
+  .titleEditPage {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.35rem;
+  }
+
+  .previewContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .photoUserData {
+    width: 100%;
+    align-items: center;
+  }
+
+  .avatarWrap,
+  .regularAvatar {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .photoUserData div {
+    gap: 0.35rem;
+  }
+
+  .photoUserData div span:first-child {
+    font-size: 0.95rem;
+    line-height: 1.15rem;
+  }
+
+  .photoUserData div span:last-child {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
+
+  .inputTitle {
+    font-size: 0.95rem;
+    line-height: 1.15rem;
+  }
+
+  .formInput,
+  .aboutInput {
+    font-size: 0.84rem;
+    line-height: 1.05rem;
+  }
+
+  .form > div:last-of-type {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainEditPage {
+    width: calc(100% - 1rem);
+    margin: 1rem auto;
+  }
+
+  .previewContainer {
+    border-radius: 1rem;
+    padding: 0.85rem;
+  }
+
+  .photoUserData {
+    gap: 0.75rem;
+  }
+
+  .avatarWrap,
+  .regularAvatar {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .titleEditPage {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+
+  .form div {
+    margin-bottom: 1rem;
+  }
+
+  .formInput {
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.65rem;
+  }
+
+  .aboutInput {
+    padding: 0.7rem 0.9rem 1.7rem 0.9rem;
+    min-height: 6rem;
+    border-radius: 0.65rem;
+  }
+
+  .counterInside {
+    right: 0.65rem;
+    bottom: 0.45rem;
+    font-size: 0.7rem;
+  }
+
+  .websiteInput {
+    padding-left: 2rem;
+  }
+
+  .websiteInputWrap img {
+    left: 0.65rem;
+  }
+}

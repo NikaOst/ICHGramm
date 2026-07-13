@@ -1,0 +1,10 @@
+.submitBtn,
+.textBtn {
+  text-align: center;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.87rem;
+  line-height: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
