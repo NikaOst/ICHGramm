@@ -1,5 +1,4 @@
 import PostsGrid from '../components/postsGrid';
-import styles from '../styles/explore.module.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPosts } from '../redux/slices/postsSlice';
@@ -19,7 +18,7 @@ function ExplorePage({ onPostClick, onOpenMenu }) {
   if (status === null || status === 'loading') return <LoadingBar />;
 
   return (
-    <div className={styles.mainExploreBox}>
+    <div>
       <PostsGrid
         type="exploreScreen"
         posts={posts}

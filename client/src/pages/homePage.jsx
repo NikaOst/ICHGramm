@@ -10,7 +10,6 @@ function HomePage({ onPostClick, onOpenMenu }) {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
   const status = useSelector((state) => state.posts.status);
-  // const error = useSelector((state) => state.posts.error);
 
   useEffect(() => {
     if (status === null) {
@@ -19,7 +18,6 @@ function HomePage({ onPostClick, onOpenMenu }) {
   }, [status, dispatch]);
 
   if (status === null || status === 'loading') return <LoadingBar />;
-  // if (status === 'failed') return <div>Failed to load posts: {String(error || '')}</div>;
 
   return (
     <div className={styles.mainHomeBox}>

@@ -32,7 +32,6 @@ function PostCard({ post, onPostClick }) {
   const likeState = useSelector((state) =>
     postId ? state.likes.byPostId[String(postId)] : undefined,
   );
-
   const commentsFromStore = useSelector((state) =>
     postId ? state.comments.byPostId[String(postId)] : undefined,
   );

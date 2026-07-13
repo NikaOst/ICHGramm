@@ -6,7 +6,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const createComment = createAsyncThunk(
   'comments/createComment',
-  async ({ postId, body }, { rejectWithValue, dispatch, getState }) => {
+  async ({ postId, body }, { rejectWithValue, dispatch }) => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
@@ -15,21 +15,7 @@ export const createComment = createAsyncThunk(
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
-      const me = getState().users.me;
-
-      const normalizedComment = {
-        ...response.data,
-        author:
-          typeof response.data.author === 'object' && response.data.author !== null
-            ? response.data.author
-            : {
-                _id: me?._id || response.data.author,
-                username: me?.username || 'user',
-                image: me?.image || null,
-              },
-      };
-
-      return { postId: String(postId), comment: normalizedComment };
+      return { postId: String(postId), comment: response.data };
     } catch (error) {
       const status = error.response?.status;
       if (status === 401 || status === 403) dispatch(logout());

@@ -39,7 +39,7 @@ function Footer({ setActiveOverlay }) {
           Create
         </button>
       </div>
-      <span>© 2024 ICHgram</span>
+      <span>© 2026 ICHgram</span>
     </div>
   );
 }

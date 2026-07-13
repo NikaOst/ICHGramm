@@ -8,12 +8,12 @@
   gap: 2.37rem;
 }
 
+.postsContainer {
+  width: 80%;
+}
+
 @media (min-width: 768px) {
   .mainHomeBox {
     padding: 3.62rem 0;
   }
-}
-
-.postsContainer {
-  width: 80%;
 }

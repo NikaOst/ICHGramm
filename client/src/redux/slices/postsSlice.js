@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { logout } from './authSlice';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const getAllPosts = createAsyncThunk('/posts', async (_, { rejectWithValue }) => {
+export const getAllPosts = createAsyncThunk('/posts', async (_, { rejectWithValue, dispatch }) => {
   try {
     const token = localStorage.getItem('token');
     const response = await axios.get(`${BASE_URL}/posts`, {
@@ -11,13 +12,20 @@ export const getAllPosts = createAsyncThunk('/posts', async (_, { rejectWithValu
     });
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response?.data || error.message);
+    const status = error.response?.status;
+    if (status === 401 || status === 403) dispatch(logout());
+
+    return rejectWithValue({
+      status,
+      data: error.response?.data,
+      message: error.message,
+    });
   }
 });
 
 export const createPost = createAsyncThunk(
   'posts/createPost',
-  async ({ body, image }, { rejectWithValue }) => {
+  async ({ body, image }, { rejectWithValue, dispatch }) => {
     try {
       const token = localStorage.getItem('token');
       const formData = new FormData();
@@ -31,16 +39,21 @@ export const createPost = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
+      const status = error.response?.status;
+      if (status === 401 || status === 403) dispatch(logout());
+
+      return rejectWithValue({
+        status,
+        data: error.response?.data,
+        message: error.message,
+      });
     }
   },
 );
 
-// http://127.0.0.1:3333/posts/:id
-
 export const deletePost = createAsyncThunk(
   'posts/deletePost',
-  async ({ id }, { rejectWithValue }) => {
+  async ({ id }, { rejectWithValue, dispatch }) => {
     try {
       const token = localStorage.getItem('token');
 
@@ -50,7 +63,14 @@ export const deletePost = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
+      const status = error.response?.status;
+      if (status === 401 || status === 403) dispatch(logout());
+
+      return rejectWithValue({
+        status,
+        data: error.response?.data,
+        message: error.message,
+      });
     }
   },
 );
