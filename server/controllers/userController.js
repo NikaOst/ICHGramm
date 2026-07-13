@@ -53,7 +53,9 @@ export const getMe = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { username, about, website } = req.body;
-    const updateData = { username, about, website };
+    const loginValue = (username || '').trim().toLowerCase();
+
+    const updateData = { username: loginValue, about, website };
 
     if (req.file) {
       updateData.image = `/uploads/avatars/${req.file.filename}`;

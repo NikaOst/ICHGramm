@@ -4,7 +4,13 @@ import jwt from 'jsonwebtoken';
 
 export const register = async (req, res) => {
   try {
-    const { name, username, email, password } = req.body;
+    const { name, email, password } = req.body;
+
+    const username = (req.body.username || '').trim();
+
+    if (/[A-Z]/.test(username)) {
+      return res.status(400).json('Username must be lowercase');
+    }
 
     const existUser = await User.findOne({
       $or: [{ email }, { username }],
