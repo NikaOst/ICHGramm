@@ -12,7 +12,6 @@ function CreatePost({ setActiveOverlay }) {
   const { register, handleSubmit, watch } = useForm({ mode: 'onChange' });
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [, setIsDragging] = useState(false);
 
   const aboutValue = watch('body', '');
   const me = useSelector((state) => state.users.me);
@@ -25,17 +24,14 @@ function CreatePost({ setActiveOverlay }) {
 
   const onDragOver = (e) => {
     e.preventDefault();
-    setIsDragging(true);
   };
 
   const onDragLeave = (e) => {
     e.preventDefault();
-    setIsDragging(false);
   };
 
   const onDrop = (e) => {
     e.preventDefault();
-    setIsDragging(false);
 
     const file = e.dataTransfer.files?.[0] || null;
     if (file && file.type.startsWith('image/')) {
